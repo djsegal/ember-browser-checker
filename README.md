@@ -1,4 +1,8 @@
-# Ember-browser-checker
+[![Ember Observer Score](http://emberobserver.com/badges/ember-browser-checker.svg)](http://emberobserver.com/addons/ember-browser-checker)
+
+### Ember-browser-checker
+
+-------------
 
 Check what browser is being used with ease. For example:
 
