@@ -25,3 +25,15 @@ You are on {{browser-name}}.
 ```
 this.get('browserChecker').get('isChrome')
 ```
+
+---------
+
+#### Browser Support
+
+Name     | Helper
+---------|-----------
+Chrome   | `is-chrome`
+Explorer | `is-explorer`
+Firefox  | `is-firefox`
+Opera    | `is-opera`
+Safari   | `is-safari`
