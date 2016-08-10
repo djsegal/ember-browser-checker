@@ -23,5 +23,5 @@ You are on {{browser-name}}.
 + Inject the `browser-checker` service and use everywhere else
 
 ```
-this.get('browserChecker').get('isSafari')
+this.get('browserChecker').get('isChrome')
 ```
