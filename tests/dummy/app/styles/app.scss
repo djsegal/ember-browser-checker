@@ -1,1 +1,25 @@
 @import 'ember-paper';
+
+@mixin vertical-align {
+  position: relative;
+  top: 100%;
+  -webkit-transform: translateY(+100%);
+  -ms-transform: translateY(+100%);
+  transform: translateY(+100%);
+  line-height: 0;
+}
+
+html, body, body > div.ember-view {
+  @extend .flex;
+  @extend .layout-column;
+}
+
+body {
+  background-color: color($color-blue-grey, '50');
+}
+
+.cs-center {
+  @extend .flex-50;
+  text-align: center;
+  @include vertical-align;
+}
