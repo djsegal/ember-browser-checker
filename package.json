@@ -1,7 +1,7 @@
 {
   "name": "ember-browser-checker",
   "version": "0.0.2",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "An ember-cli addon that give you a simple, Ember-aware way of dealing with browser checking.",
   "directories": {
     "doc": "doc",
     "test": "tests"
