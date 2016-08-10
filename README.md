@@ -32,7 +32,9 @@ this.get('browserChecker').get('isChrome')
 
 Name     | Helper
 ---------|-----------
+Blink    | `is-blink`
 Chrome   | `is-chrome`
+Edge     | `is-edge`
 Explorer | `is-explorer`
 Firefox  | `is-firefox`
 Opera    | `is-opera`

@@ -4,9 +4,9 @@ const { capitalize } = Ember.String;
 
 export default Ember.Service.extend({
 
-  browserList: ['chrome', 'explorer', 'firefox', 'opera', 'safari'],
+  browserList: ['blink', 'chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'],
 
-  browserName: Ember.computed('browserList', 'isChrome', 'isExplorer', 'isFirefox', 'isSafari', 'isOpera', function() {
+  browserName: Ember.computed('browserList', 'isBlink', 'isChrome', 'isEdge', 'isExplorer', 'isFirefox', 'isOpera', 'isSafari', function() {
     var browserList = this.get('browserList');
     if ( !browserList ) { return; }
 
@@ -20,7 +20,9 @@ export default Ember.Service.extend({
     }
   }),
 
+  isBlink: false,
   isChrome: false,
+  isEdge: false,
   isExplorer: false,
   isFirefox: false,
   isOpera: false,
@@ -28,31 +30,47 @@ export default Ember.Service.extend({
 
   init() {
     this._super(...arguments);
+    this.getBrowserInfo();
+  },
 
-    var isExplorer = this.checkBrowserFor('MSIE'),
-        isFirefox = this.checkBrowserFor('Firefox');
+  getBrowserInfo: function() {
 
-    if ( isExplorer || isFirefox ) {
-      this.setProperties({
-        isExplorer: isExplorer,
-        isFirefox: isFirefox
-      });
-      return;
-    }
+    // from: http://stackoverflow.com/a/9851769/5187080
 
-    var isChrome = this.checkBrowserFor('Chrome'),
-        isSafari = this.checkBrowserFor('Safari');
-    if ( isChrome && isSafari ) { isSafari = false; }
+    // ------------------
+    //  Current Browsers
+    // ------------------
 
-    var browserAgent = navigator.userAgent,
-        isOpera = browserAgent.toLowerCase().indexOf("op") > -1;
-    if ( isChrome && isOpera ) { isChrome = false; }
+    // Blink engine detection
+    // Chrome 1+
+    // Edge 20+
+    // Internet Explorer 6-11
+    // Firefox 1.0+
+    // Opera 8.0+
+    // At least Safari 3+: "[object HTMLElementConstructor]"
 
-      this.setProperties({
-        isChrome: isChrome,
-        isSafari: isSafari,
-        isOpera: isOpera
-      });
+    var isOpera = !!window.opera;
+    isOpera = isOpera || ( !!window.opr && !!opr.addons );
+    isOpera = isOpera || ( navigator.userAgent.indexOf(' OPR/') >= 0 );
+
+    var isChrome = ( !!window.chrome && !!window.chrome.webstore ),
+        isExplorer = ( /*@cc_on!@*/false || !!document.documentMode ),
+        isFirefox = ( typeof InstallTrigger !== 'undefined' ),
+        isSafari = ( Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 );
+
+    var isBlink = ( isChrome || isOpera ) && !!window.CSS,
+        isEdge = ( !isExplorer && !!window.StyleMedia );
+
+    this.setProperties({
+      isBlink: isBlink,
+      isChrome: isChrome,
+      isEdge: isEdge,
+      isExplorer: isExplorer,
+      isFirefox: isFirefox,
+      isOpera: isOpera,
+      isSafari: isSafari
+    });
+
   },
 
   checkBrowserFor: function(browserTag) {
