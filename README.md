@@ -1,26 +1,25 @@
 # Ember-browser-checker
 
-This README outlines the details of collaborating on this Ember addon.
+Check what browser is being used with ease. For example:
 
-## Installation
++ Print a special message for safari:
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+```
+{{#if is-safari}}
+  I'm on a safari!
+{{/if}}
+```
 
-## Running
++ Get the name of the user's brower:
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+```
+You are on {{browser-name}}.
+```
 
-## Running Tests
++ Inject the `browser-checker` service and use everywhere else
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+```
+this.get('browserChecker').get('isSafari')
+```
 
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+-----------
