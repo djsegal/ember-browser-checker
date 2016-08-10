@@ -1,12 +1,14 @@
+/* globals opr */
+
 import Ember from 'ember';
 
 const { capitalize } = Ember.String;
 
 export default Ember.Service.extend({
 
-  browserList: ['blink', 'chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'],
+  browserList: ['chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'],
 
-  browserName: Ember.computed('browserList', 'isBlink', 'isChrome', 'isEdge', 'isExplorer', 'isFirefox', 'isOpera', 'isSafari', function() {
+  browserName: Ember.computed('browserList', 'isChrome', 'isEdge', 'isExplorer', 'isFirefox', 'isOpera', 'isSafari', function() {
     var browserList = this.get('browserList');
     if ( !browserList ) { return; }
 
