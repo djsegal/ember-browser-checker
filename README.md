@@ -9,7 +9,7 @@ Check what browser is being used with ease. For example:
 + Print a special message for safari:
 
 ```
-{{#if is-safari}}
+{{#if (is-safari)}}
   I'm on a safari!
 {{/if}}
 ```
