@@ -21,5 +21,3 @@ You are on {{browser-name}}.
 ```
 this.get('browserChecker').get('isSafari')
 ```
-
------------
