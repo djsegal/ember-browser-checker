@@ -20,6 +20,8 @@ export default Ember.Service.extend({
       isBrowser = 'is' + capitalize(curBrowser);
       if ( this.get(isBrowser) ) { return curBrowser; }
     }
+
+    return 'unsupported browser';
   }),
 
   isBlink: false,
