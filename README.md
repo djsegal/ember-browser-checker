@@ -2,6 +2,14 @@
 
 ### Ember-browser-checker
 
+### Installation
+
+-------------
+
+`ember install ember-browser-checker`
+
+### Usage
+
 -------------
 
 Check what browser is being used with ease. For example:
@@ -20,9 +28,11 @@ Check what browser is being used with ease. For example:
 You are on {{browser-name}}.
 ```
 
-+ Inject the `browser-checker` service and use everywhere else
++ Inject the `browserChecker` service and use everywhere else
 
-```
+```js
+browserChecker: Ember.inject.service();
+...
 this.get('browserChecker').get('isChrome')
 ```
 
