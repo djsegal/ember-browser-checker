@@ -1,16 +1,29 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-browser-checker.svg)](http://emberobserver.com/addons/ember-browser-checker)
 
-### Ember-browser-checker
+ember-browser-checker
+==============================================================================
 
-### Installation
+Browser detector using browser features, not `navigator.userAgent`
 
--------------
 
-`ember install ember-browser-checker`
+Compatibility
+------------------------------------------------------------------------------
 
-### Usage
+* Ember.js v3.12 or above
+* Ember CLI v2.13 or above
+* Node.js v10 or above
 
--------------
+
+Installation
+------------------------------------------------------------------------------
+
+```
+ember install ember-browser-checker
+```
+
+
+Usage
+------------------------------------------------------------------------------
 
 Check what browser is being used with ease. For example:
 
@@ -22,7 +35,7 @@ Check what browser is being used with ease. For example:
 {{/if}}
 ```
 
-+ Get the name of the user's brower:
++ Get the name of the user's browser:
 
 ```
 You are on {{browser-name}}.
@@ -36,9 +49,8 @@ browserChecker: Ember.inject.service();
 this.get('browserChecker').get('isChrome')
 ```
 
----------
-
-#### Browser Support
+Browsers detected
+------------------------------------------------------------------------------
 
 Name     | Helper
 ---------|-----------
@@ -49,3 +61,14 @@ Explorer | `is-explorer`
 Firefox  | `is-firefox`
 Opera    | `is-opera`
 Safari   | `is-safari`
+
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).
