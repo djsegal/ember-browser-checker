@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import Helper from '@ember/component/helper';
+import { inject as service } from '@ember/service';
 
-export default Ember.Helper.extend({
-  browserChecker: Ember.inject.service(),
+export default class IsChrome extends Helper {
+  @service('browser-checker') browserChecker;
 
   compute() {
-    let browserChecker = this.get('browserChecker');
-    return browserChecker.get('isFirefox');
+    return this.browserChecker.isFirefox;
   }
-});
+}
