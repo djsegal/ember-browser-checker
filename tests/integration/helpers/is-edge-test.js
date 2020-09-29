@@ -2,16 +2,19 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
+import window from 'ember-window-mock';
 
-module('Integration | Helper | is-edge', function (hooks) {
+module('Integration | Helper | isEdge', function (hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function (assert) {
-    this.set('inputValue', '1234');
+  test('it detects edge', async function (assert) {
+    assert.expect(1);
 
-    await render(hbs`{{is-edge inputValue}}`);
+     // pretend we are Edge
+     window.StyleMedia = true;
+     
+    await render(hbs`{{is-edge}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), "true");
   });
 });

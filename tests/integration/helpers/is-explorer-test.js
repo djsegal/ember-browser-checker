@@ -6,12 +6,14 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Helper | is-explorer', function (hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
-  test('it renders', async function (assert) {
-    this.set('inputValue', '1234');
+  test('it detects IE', async function (assert) {
+    assert.expect(1);
 
-    await render(hbs`{{is-explorer inputValue}}`);
+    // pretend we are explorer
+    document.documentMode = true;
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    await render(hbs`{{is-explorer}}`);
+
+    assert.equal(this.element.textContent.trim(), 'true');
   });
 });
