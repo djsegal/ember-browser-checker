@@ -12,7 +12,7 @@ export default class BrowserCheckerService extends Service {
   isSafari = false;
 
   // prettier-ignore
-  browserList = [ 'chrome', 'edge', 'explorer', 'edgeChromiun', 'firefox', 'opera', 'safari'];
+  browserList = [ 'chrome', 'edge', 'explorer', 'edgeChromium', 'firefox', 'opera', 'safari'];
 
   constructor() {
     super(...arguments);
