@@ -1,4 +1,4 @@
-[![Ember Observer Score](http://emberobserver.com/badges/ember-browser-checker.svg)](http://emberobserver.com/addons/ember-browser-checker)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-browser-checker.svg)](https://emberobserver.com/addons/ember-browser-checker)
 
 ember-browser-checker
 ==============================================================================
@@ -44,24 +44,60 @@ You are on {{browser-name}}.
 + Inject the `browserChecker` service and use everywhere else
 
 ```js
-browserChecker: Ember.inject.service();
+import { inject as service } from '@ember/service';
+
 ...
-this.get('browserChecker').get('isChrome')
+@service browserChecker;
+
+this.browserChecker.isChrome
 ```
 
 Browsers detected
 ------------------------------------------------------------------------------
 
-Name         | Helper
--------------|-------------------
-Blink        | `is-blink`
-Chrome       | `is-chrome`
-Edge         | `is-edge`
-EdgeChromium | `is-edge-chromium`
-Explorer     | `is-explorer`
-Firefox      | `is-firefox`
-Opera        | `is-opera`
-Safari       | `is-safari`
+Name         | Helper             | {{browser-name}} | Detects
+-------------|--------------------|-----------------|---------
+Blink        | `is-blink`         | n/a <sup>*</sup> |
+Chrome       | `is-chrome`        | `chrome`        | 1.0+
+Edge         | `is-edge`          | `edge`          | 20+
+EdgeChromium | `is-edge-chromium` | `edgeChromium`  | all
+Explorer     | `is-explorer`      | `explorer`      | 6-11
+Firefox      | `is-firefox`       | `firefox`       | 1.0+
+Opera        | `is-opera`         | `opera`         | 8.0+
+Safari       | `is-safari`        | `safari`        | 3.0+
+
+<sup>*</sup> Blink is the rendering engine used by multiple browsers (Chrome, Microsoft Edge (chromium), Opera) so `blink` is not returned by the helper
+
+Template linting errors
+------------------------------------------------------------------------------
+
+In Ember Octane (v3.15+), non-builtin helpers will generate linting errors for the following rules: `no-curly-component-invocation` and `no-implict-this`.
+
+To disable these errors, you need to allow the helpers in the `.template-lintrc.js` file located in the project root. Example entries for the browser helpers is below:
+
+```js
+'use strict';
+
+module.exports = {
+  extends: 'octane',
+  rules: {
+    'no-curly-component-invocation': {
+      allow: [
+        'browser-name',
+        'is-blink',
+        ...
+      ]
+    },
+    'no-implicit-this': {
+      allow: [
+        'browser-name',
+        'is-blink',
+        ...
+      ]
+    }
+  }
+};
+```
 
 Contributing
 ------------------------------------------------------------------------------
