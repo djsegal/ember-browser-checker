@@ -5,13 +5,14 @@ export default class BrowserCheckerService extends Service {
   isBlink = false;
   isChrome = false;
   isEdge = false;
+  isEdgeChromium = false;
   isExplorer = false;
   isFirefox = false;
   isOpera = false;
   isSafari = false;
 
   // prettier-ignore
-  browserList = [ 'chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'];
+  browserList = [ 'chrome', 'edge', 'explorer', 'edgeChromiun', 'firefox', 'opera', 'safari'];
 
   constructor() {
     super(...arguments);
@@ -44,6 +45,7 @@ export default class BrowserCheckerService extends Service {
     // Blink engine detection
     // Chrome 1+
     // Edge 20+
+    // EdgeChromium
     // Internet Explorer 6-11
     // Firefox 1.0+
     // Opera 8.0+
@@ -62,6 +64,10 @@ export default class BrowserCheckerService extends Service {
 
     // Edge 20+
     this.isEdge = !this.isExplorer && !!window.StyleMedia;
+
+    // Edge (based on chromium) detection
+    this.isEdgeChromium =
+      this.isChrome && navigator.userAgent.indexOf('Edg') != -1;
 
     // Firefox / Gecko browsers
     this.isFirefox = typeof InstallTrigger !== 'undefined';

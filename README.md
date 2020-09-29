@@ -52,15 +52,16 @@ this.get('browserChecker').get('isChrome')
 Browsers detected
 ------------------------------------------------------------------------------
 
-Name     | Helper
----------|-----------
-Blink    | `is-blink`
-Chrome   | `is-chrome`
-Edge     | `is-edge`
-Explorer | `is-explorer`
-Firefox  | `is-firefox`
-Opera    | `is-opera`
-Safari   | `is-safari`
+Name         | Helper
+-------------|-------------------
+Blink        | `is-blink`
+Chrome       | `is-chrome`
+Edge         | `is-edge`
+EdgeChromium | `is-edge-chromium`
+Explorer     | `is-explorer`
+Firefox      | `is-firefox`
+Opera        | `is-opera`
+Safari       | `is-safari`
 
 Contributing
 ------------------------------------------------------------------------------
