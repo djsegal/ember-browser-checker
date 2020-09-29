@@ -12,7 +12,8 @@ export default class BrowserCheckerService extends Service {
   isSafari = false;
 
   // prettier-ignore
-  browserList = [ 'chrome', 'edge', 'explorer', 'edgeChromium', 'firefox', 'opera', 'safari'];
+  // DO NOT CHANGE THE ORDER - edgeChromium must come before chrome
+  browserList = [ 'edgeChromium', 'chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'];
 
   constructor() {
     super(...arguments);
@@ -56,9 +57,6 @@ export default class BrowserCheckerService extends Service {
     this.isChrome =
       this.isChrome || (!!window.chrome && !!window.chrome.runtime); // 80+
 
-    // Blink engines
-    this.isBlink = (this.isChrome || this.isOpera) && !!window.CSS;
-
     // IE 8 - 11
     this.isExplorer = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -91,5 +89,8 @@ export default class BrowserCheckerService extends Service {
           // eslint-disable-next-line no-undef
           (typeof safari !== 'undefined' && safari.pushNotification)
       );
+
+    // Blink engines
+    this.isBlink = (this.isChrome || this.isOpera) && !!window.CSS;
   }
 }
