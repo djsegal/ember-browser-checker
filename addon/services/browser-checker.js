@@ -1,49 +1,45 @@
-/* globals opr */
+import Service from '@ember/service';
+import { capitalize } from '@ember/string';
 
-import Ember from 'ember';
+export default class BrowserCheckerService extends Service {
+  isBlink = false;
+  isChrome = false;
+  isEdge = false;
+  isExplorer = false;
+  isFirefox = false;
+  isOpera = false;
+  isSafari = false;
 
-const { capitalize } = Ember.String;
+  // prettier-ignore
+  browserList = [ 'chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'];
 
-export default Ember.Service.extend({
-
-  browserList: ['chrome', 'edge', 'explorer', 'firefox', 'opera', 'safari'],
-
-  browserName: Ember.computed('browserList', 'isChrome', 'isEdge', 'isExplorer', 'isFirefox', 'isOpera', 'isSafari', function() {
-    var browserList = this.get('browserList');
-    if ( !browserList ) { return; }
-
-    var arrayLength = browserList.length,
-        curBrowser, isBrowser;
-
-    for (var i = 0; i < arrayLength; i++) {
-      curBrowser = browserList[i];
-      isBrowser = 'is' + capitalize(curBrowser);
-      if ( this.get(isBrowser) ) { return curBrowser; }
-    }
-
-    return 'unsupported browser';
-  }),
-
-  isBlink: false,
-  isChrome: false,
-  isEdge: false,
-  isExplorer: false,
-  isFirefox: false,
-  isOpera: false,
-  isSafari: false,
-
-  init() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
     this.getBrowserInfo();
-  },
+  }
 
-  getBrowserInfo: function() {
+  browserName() {
+    const list = this.browserList;
+    let curBrowser, isBrowser;
 
+    for (var i = 0; i < list.length; i++) {
+      curBrowser = list[i];
+      isBrowser = `is${capitalize(curBrowser)}`;
+      if (this.get(isBrowser)) return curBrowser;
+    }
+    return null;
+  }
+
+  getBrowserInfo() {
+    // original detection logic
     // from: http://stackoverflow.com/a/9851769/5187080
 
-    // ------------------
-    //  Current Browsers
-    // ------------------
+    // additional checks
+    // https://dev.to/_elmahdim/safe-reliable-browser-sniffing-39bp
+
+    // ---------------------------
+    //  Current Browsers detected
+    // ---------------------------
 
     // Blink engine detection
     // Chrome 1+
@@ -53,35 +49,41 @@ export default Ember.Service.extend({
     // Opera 8.0+
     // At least Safari 3+: "[object HTMLElementConstructor]"
 
-    var isOpera = !!window.opera;
-    isOpera = isOpera || ( !!window.opr && !!opr.addons );
-    isOpera = isOpera || ( navigator.userAgent.indexOf(' OPR/') >= 0 );
+    // Chrome
+    this.isChrome = !!window.chrome && !!window.chrome.webstore; // 1 - 79 deprecated 2018
+    this.isChrome =
+      this.isChrome || (!!window.chrome && !!window.chrome.runtime); // 80+
 
-    var isChrome = ( !!window.chrome && !!window.chrome.webstore ),
-        isExplorer = ( /*@cc_on!@*/false || !!document.documentMode ),
-        isFirefox = ( typeof InstallTrigger !== 'undefined' ),
-        isSafari = ( Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 );
+    // Blink engines
+    this.isBlink = (this.isChrome || this.isOpera) && !!window.CSS;
 
-    var isBlink = ( isChrome || isOpera ) && !!window.CSS,
-        isEdge = ( !isExplorer && !!window.StyleMedia );
+    // IE 8 - 11
+    this.isExplorer = /*@cc_on!@*/ false || !!document.documentMode;
 
-    this.setProperties({
-      isBlink: isBlink,
-      isChrome: isChrome,
-      isEdge: isEdge,
-      isExplorer: isExplorer,
-      isFirefox: isFirefox,
-      isOpera: isOpera,
-      isSafari: isSafari
-    });
+    // Edge 20+
+    this.isEdge = !this.isExplorer && !!window.StyleMedia;
 
-  },
+    // Firefox / Gecko browsers
+    this.isFirefox = typeof InstallTrigger !== 'undefined';
 
-  checkBrowserFor: function(browserTag) {
-    var browserAgent = navigator.userAgent,
-        hasBrowserTag = ( browserAgent.indexOf(browserTag) > -1 );
+    // Opera
+    this.isOpera = !!window.opera; // opera 8+
+    // eslint-disable-next-line no-undef
+    this.isOpera = this.isOpera || (!!window.opr && !!opr.addons); // opera 20+ evergreen
+    this.isOpera = this.isOpera || navigator.userAgent.indexOf(' OPR/') >= 0; // least reliable
 
-    return hasBrowserTag;
+    // Safari
+    this.isSafari = /constructor/i.test(window.HTMLElement); // 3+
+    this.isSafari = this.isSafari || !!window.ApplePaySession; // 11.1+ ios 11.3+
+    this.isSafari =
+      this.isSafari ||
+      (function (p) {
+        // 7.1+
+        return p.toString() === '[object SafariRemoteNotification]';
+      })(
+        !window['safari'] ||
+          // eslint-disable-next-line no-undef
+          (typeof safari !== 'undefined' && safari.pushNotification)
+      );
   }
-
-});
+}
