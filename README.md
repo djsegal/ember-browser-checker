@@ -49,22 +49,29 @@ import { inject as service } from '@ember/service';
 ...
 @service browserChecker;
 
+this.browserChecker.isBlink
 this.browserChecker.isChrome
+this.browserChecker.isEdge
+this.browserChecker.isEdgeChromium
+this.browserChecker.isExplorer
+this.browserChecker.isFirefox
+this.browserChecker.isOpera
+this.browserChecker.isSafari
 ```
 
 Browsers detected
 ------------------------------------------------------------------------------
 
-Name         | Helper             | {{browser-name}} | Detects
--------------|--------------------|-----------------|---------
+Browser      | Helper             | {{browser-name}} | Detects
+-------------|--------------------|------------------|--------
 Blink        | `is-blink`         | n/a <sup>*</sup> |
-Chrome       | `is-chrome`        | `chrome`        | 1.0+
-Edge         | `is-edge`          | `edge`          | 20+
-EdgeChromium | `is-edge-chromium` | `edgeChromium`  | all
-Explorer     | `is-explorer`      | `explorer`      | 6-11
-Firefox      | `is-firefox`       | `firefox`       | 1.0+
-Opera        | `is-opera`         | `opera`         | 8.0+
-Safari       | `is-safari`        | `safari`        | 3.0+
+Chrome       | `is-chrome`        | `chrome`         | 1.0+
+Edge         | `is-edge`          | `edge`           | 20+
+EdgeChromium | `is-edge-chromium` | `edgeChromium`   | all
+Explorer     | `is-explorer`      | `explorer`       | 6-11
+Firefox      | `is-firefox`       | `firefox`        | 1.0+
+Opera        | `is-opera`         | `opera`          | 8.0+
+Safari       | `is-safari`        | `safari`         | 3.0+
 
 <sup>*</sup> Blink is the rendering engine used by multiple browsers (Chrome, Microsoft Edge (chromium), Opera) so `blink` is not returned by the helper
 
