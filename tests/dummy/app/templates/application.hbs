@@ -1,23 +1,16 @@
-{{outlet "navbar"}}
+<Navbar />
 
 <div class="flex layout-row">
-
-  <div class="flex-5 flex-gt-sm-20">
-  </div>
+  <div class="flex-5 flex-gt-sm-20"></div>
 
   <div class="flex-90 flex-gt-sm-60 layout-column">
-
-    <div class="flex-5 flex-gt-sm-20">
-    </div>
+    <div class="flex-5 flex-gt-sm-20"></div>
 
     <div class="flex-90 flex-gt-sm-60 layout-column">
-
-      {{#paper-card class="flex layout-column" as |card|}}
-
-        {{#card.content class="flex layout-column"}}
+      <PaperCard class="flex layout-column" as |card|>
+        <card.content class="flex layout-column">
 
           <div class="cs-center flex">
-
             <span>
               You are on
             </span>
@@ -35,19 +28,12 @@
             </span>
 
           </div>
-
-        {{/card.content}}
-
-      {{/paper-card}}
-
+        </card.content>
+      </PaperCard>
     </div>
 
-    <div class="flex-5 flex-gt-sm-20">
-    </div>
-
+    <div class="flex-5 flex-gt-sm-20"></div>
   </div>
 
-  <div class="flex-5 flex-gt-sm-20">
-  </div>
-
+  <div class="flex-5 flex-gt-sm-20"></div>
 </div>

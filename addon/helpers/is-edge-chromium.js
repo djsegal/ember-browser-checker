@@ -5,6 +5,6 @@ export default class IsChrome extends Helper {
   @service('browser-checker') browserChecker;
 
   compute() {
-    return this.browserChecker.isFirefox;
+    return this.browserChecker.isEdgeChromium;
   }
 }
