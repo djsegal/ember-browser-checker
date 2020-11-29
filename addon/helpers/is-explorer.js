@@ -1,7 +1,7 @@
 import Helper from '@ember/component/helper';
 import { inject as service } from '@ember/service';
 
-export default class IsChrome extends Helper {
+export default class IsExplorer extends Helper {
   @service('browser-checker') browserChecker;
 
   compute() {
