@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { capitalize } from '@ember/string';
+import { get } from '@ember/object';
 
 export default class BrowserCheckerService extends Service {
   isBlink = false;
@@ -27,7 +28,7 @@ export default class BrowserCheckerService extends Service {
     for (var i = 0; i < list.length; i++) {
       curBrowser = list[i];
       isBrowser = `is${capitalize(curBrowser)}`;
-      if (this.get(isBrowser)) return curBrowser;
+      if (get(this, isBrowser)) return curBrowser;
     }
     return null;
   }
